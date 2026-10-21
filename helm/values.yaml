@@ -1,0 +1,69 @@
+replicaCount: 1
+
+ezua:
+  virtualService:
+    enabled: true
+    #Set your AIE endponit
+    endpoint: ""
+    istioGateway: "istio-system/ezaf-gateway"
+
+image:
+  repository: docker.io/fideltak/pcai-s3-image-viewer
+  tag: 0.1.0
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 8000
+
+s3:
+  # Set your S3 endpoint
+  endpoint: ""
+  region: ""
+  sslVerify: true
+  addressingStyle: "path"
+  # Use an existing Kubernetes Secret when possible.
+  existingSecret: ""
+  accessKey: AWS_ACCESS_KEY
+  accessKeySecret: AWS_ACCESS_KEY_SECRET
+  sessionToken: AWS_SESSION_TOKEN
+  useSessionToken: false # true to read optional session token from existing Secret
+  # Optional inline credentials. Prefer existingSecret in production.
+  # Helm release values contain secrets when these are set.
+  credentials:
+    accessKey: ""
+    accessKeySecret: ""
+    sessionToken: ""
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+# Leave disabled until you configure your own host, gateway and TLS.
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: images.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+podAnnotations: {}
+podLabels:
+  hpe-ezua/type: "vendor-service"
+  hpe-ezua/app: "s3-image-viewer"

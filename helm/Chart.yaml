@@ -1,0 +1,6 @@
+apiVersion: v2
+name: s3-image-viewer
+version: 0.1.0
+appVersion: "0.1.0"
+description: A viewer serving images on s3 via path-based URLs
+type: application
