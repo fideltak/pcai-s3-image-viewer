@@ -64,6 +64,4 @@ ingress:
   tls: []
 
 podAnnotations: {}
-podLabels:
-  hpe-ezua/type: "vendor-service"
-  hpe-ezua/app: "s3-image-viewer"
+podLabels: {}
