@@ -18,6 +18,8 @@ spec:
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
+        hpe-ezua/type: "vendor-service"
+        hpe-ezua/app: {{ .Release.Name | quote }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
